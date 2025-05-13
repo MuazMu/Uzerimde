@@ -77,9 +77,6 @@ const AvatarCreator: React.FC<AvatarCreatorProps> = ({ onAvatarCreated, userImag
             subdomain={subdomain}
             className="w-full h-full"
             config={{
-              clearCache: true,
-              bodyType: 'fullbody',
-              quickStart: false,
               language: 'tr'
             }}
           />

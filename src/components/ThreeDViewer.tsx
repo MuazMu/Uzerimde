@@ -1,6 +1,11 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { OrbitControls, useGLTF, useAnimations, Environment, useTexture } from '@react-three/drei';
+import { 
+  OrbitControls, 
+  useGLTF, 
+  useAnimations, 
+  Environment 
+} from '@react-three/drei';
 import * as THREE from 'three';
 
 interface TextureMaps {
@@ -79,10 +84,10 @@ function Avatar({
           );
           
           if (matchingAnim) {
-            actions[matchingAnim].reset().play();
+            actions[matchingAnim]?.reset()?.play();
           } else {
             // Just play the first animation as last resort
-            actions[availableAnimations[0]].reset().play();
+            actions[availableAnimations[0]]?.reset()?.play();
           }
         }
       }
@@ -103,12 +108,19 @@ function Avatar({
         // Load clothing items
         for (const item of clothingItems) {
           try {
-            const { scene: clothingScene } = await useGLTF.preload(item.modelUrl);
-            const clothingModel = clothingScene.clone();
+            // Type assertion to handle TypeScript error
+            const gltf = await useGLTF.preload(item.modelUrl) as any;
+            
+            if (!gltf || !gltf.scene) {
+              console.error(`Failed to load model scene: ${item.modelUrl}`);
+              continue;
+            }
+            
+            const clothingModel = gltf.scene.clone();
             
             // Apply textures if available
             if (item.textureMaps) {
-              clothingModel.traverse((child) => {
+              clothingModel.traverse((child: THREE.Object3D) => {
                 if (child instanceof THREE.Mesh) {
                   const material = child.material as THREE.MeshStandardMaterial;
                   

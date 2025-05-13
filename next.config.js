@@ -21,6 +21,12 @@ const nextConfig = {
       },
     });
 
+    // Add a rule to handle the three-mesh-bvh module
+    config.module.rules.push({
+      test: /three-mesh-bvh/,
+      use: 'null-loader'
+    });
+
     return config;
   },
 };
