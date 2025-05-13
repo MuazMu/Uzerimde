@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-interface ClothingItem {
+export interface ClothingItem {
   id: string;
   name: string;
   category: 'upper' | 'lower' | 'shoes' | 'full';

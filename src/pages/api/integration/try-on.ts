@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { generateAvatar } from '@/services/avatarService';
-import { applyClothing } from '@/services/clothingService';
+import { applyClothing, ClothingItem } from '@/services/clothingService';
 import { estimateBodyMeasurements, getSizeRecommendation } from '@/services/sizeEstimationService';
 import axios from 'axios';
 
@@ -8,6 +8,7 @@ type TryOnRequest = {
   userImageUrl: string;
   clothingItems: Array<{
     id: string;
+    name: string;
     category: 'upper' | 'lower' | 'shoes' | 'full';
     imageUrl: string;
   }>;
@@ -88,7 +89,7 @@ export default async function handler(
     }
     
     // Generate size recommendations if requested
-    let sizeRecommendations = {};
+    let sizeRecommendations: Record<string, any> = {};
     if (includeSizeRecommendations && bodyMeasurements) {
       for (const item of clothingItems) {
         const recommendation = await getSizeRecommendation(bodyMeasurements, item.id);
@@ -97,7 +98,7 @@ export default async function handler(
     }
     
     // Apply clothing items to avatar
-    const clothedAvatarUrl = await applyClothing(avatarUrl, clothingItems);
+    const clothedAvatarUrl = await applyClothing(avatarUrl, clothingItems as ClothingItem[]);
     
     // Prepare the result
     const result: TryOnResponse = {

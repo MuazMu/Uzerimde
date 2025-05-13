@@ -1,1 +1,1 @@
-{"version":1,"functions":{"/api/generateAvatar":{},"/api/overlay2d":{}}}
+{"version":1,"functions":{"/api/generateAvatar":{},"/api/overlay2d":{},"/api/integration/try-on":{}}}
