@@ -80,24 +80,7 @@ const AvatarCreator: React.FC<AvatarCreatorProps> = ({ onAvatarCreated, userImag
               clearCache: true,
               bodyType: 'fullbody',
               quickStart: false,
-              language: 'tr',
-              segmentId: 'uzerimde-web-app',
-              avatarRenderOptions: {
-                background: { r: 255, g: 255, b: 255, a: 0 },
-                cameraTarget: { x: 0, y: 0.8, z: 0 },
-                cameraInitialDistance: 1.8,
-                cameraFov: 45,
-                cameraMinDistance: 0.5,
-                cameraMaxDistance: 5,
-                useHDRI: true,
-                hdriPath: '/models/environments/studio_hdri.hdr',
-                useBasicLighting: false,
-              },
-              userFeatures: {
-                allowEditAvatar: true,
-                allowAvatarFullAccess: true,
-                allowExport: true,
-              }
+              language: 'tr'
             }}
           />
         </div>
