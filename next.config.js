@@ -4,8 +4,18 @@ const nextConfig = {
   images: {
     domains: [
       'localhost',
+      'api.avaturn.me',
+      'api.fashn.ai',
+      'api.sizer.me',
+      'example.com',
       // Add other domains as needed, for example if using S3 for image storage
     ],
+  },
+  env: {
+    NEXT_PUBLIC_AVATURN_API_KEY: process.env.NEXT_PUBLIC_AVATURN_API_KEY,
+    NEXT_PUBLIC_FASHN_API_KEY: process.env.NEXT_PUBLIC_FASHN_API_KEY,
+    NEXT_PUBLIC_SIZER_API_KEY: process.env.NEXT_PUBLIC_SIZER_API_KEY,
+    NEXT_PUBLIC_RPM_SUBDOMAIN: process.env.NEXT_PUBLIC_RPM_SUBDOMAIN || 'uzerimde',
   },
   webpack(config) {
     // This allows the app to handle GLB and other 3D file formats
